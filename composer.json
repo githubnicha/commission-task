@@ -15,8 +15,7 @@
     },
     "require": {
         "php": ">=7.0",
-        "ext-bcmath": "*",
-        "php-decimal/php-decimal": "*"
+        "ext-bcmath": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.5",
