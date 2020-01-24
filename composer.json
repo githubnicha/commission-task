@@ -1,0 +1,35 @@
+{
+    "name": "chasj/commission-task",
+    "description": "Compute transaction commission",
+    "keywords": [],
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Chasj\\CommissionTask\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Chasj\\CommissionTask\\Tests\\": "tests"
+        }
+    },
+    "require": {
+        "php": ">=7.0",
+        "ext-bcmath": "*",
+        "php-decimal/php-decimal": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.5",
+        "friendsofphp/php-cs-fixer": "2.16"
+    },
+    "config": {
+        "sort-packages": true,
+        "bin-dir": "bin"
+    },
+    "scripts": {
+        "phpunit": "phpunit",
+        "fix-cs": "php-cs-fixer fix",
+        "test-cs": "php-cs-fixer fix --dry-run -v",
+        "test": ["@phpunit", "@test-cs"]
+    }
+}
