@@ -2,7 +2,6 @@
 require_once __DIR__ . '/vendor/autoload.php';
 
 use Chasj\CommissionTask\Service\CommissionProcess;
-use Decimal\Decimal;
 
 if (count($argv) != 2) {
     return print("Usage: php commission.php CSV_FILE\n");
