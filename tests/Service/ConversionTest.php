@@ -6,6 +6,7 @@ namespace Chasj\CommissionTask\Tests\Service;
 
 use PHPUnit\Framework\TestCase;
 use Chasj\CommissionTask\Service\Conversion;
+use Chasj\CommissionTask\Service\JpyCurrency;
 
 class ConversionTest extends TestCase
 {
@@ -16,14 +17,14 @@ class ConversionTest extends TestCase
 
     public function setUp()
     {
-        $this->conversion = new Conversion();
+        $this->conversion = new Conversion(new JpyCurrency());
     }
 
     public function testConvertToBase()
     {  
         $this->assertEquals(
             10.00,
-            $this->conversion->convertToBase('JPY', 1295.30)
+            $this->conversion->convertToBase(1295.30)
         );
     }
 
@@ -31,7 +32,7 @@ class ConversionTest extends TestCase
     {  
         $this->assertEquals(
             7.72,
-            $this->conversion->convertToBase('JPY', 1000)
+            $this->conversion->convertToBase(1000)
         );
     }
 }

@@ -4,27 +4,21 @@ declare(strict_types=1);
 
 namespace Chasj\CommissionTask\Service;
 
-use stdClass;
 use Exception;
 
 class CurrencyFactory
 {
     public function get(string $currency) 
     {
-        $currencyClass = new stdClass;
         switch ($currency) {
             case 'EUR': 
-                $currencyClass = new EurCurrency();
-                break;
+                return new EurCurrency();
             case 'USD': 
-                $currencyClass = new UsdCurrency();
-                break;
+                return new UsdCurrency();
             case 'JPY': 
-                $currencyClass = new JpyCurrency();
-                break;
+                return new JpyCurrency();
             default:
                 throw new Exception('Invalid Currency');       
         }
-        return $currencyClass;
     }
 }

@@ -11,3 +11,7 @@
 2020-01-07,1,natural,cash_out,100,USD
 2020-02-19,5,natural,cash_out,3000000,JPY
 2020-02-20,5,legal,cash_out,10000,JPY
+2017-12-31,4,natural,cash_out,12000,EUR
+2017-12-31,4,legal,cash_out,12000,EUR
+2017-12-31,4,natural,cash_in,12000,EUR
+2017-12-31,4,legal,cash_in,12000,EUR

@@ -4,24 +4,19 @@ declare(strict_types=1);
 
 namespace Chasj\CommissionTask\Service;
 
-use stdClass;
 use Exception;
 
 class OperationTypeFactory
 {
     public static function get(UserTypeInterface $userType, string $type)
     {
-        $operationType = new stdClass;
         switch ($type) {
             case 'cash_in': 
-                $operationType = new CashInCommission($userType);
-                break;
+                return new CashInCommission($userType);
             case 'cash_out': 
-                $operationType = new CashOutCommission($userType);
-                break;
+                return new CashOutCommission($userType);
             default:
                 throw new Exception('Invalid Operation Type');    
         }
-        return $operationType;
     }
 }

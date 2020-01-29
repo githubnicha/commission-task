@@ -15,7 +15,7 @@ class Commission
         $this->conversion = $conversion;
     }
 
-    private function getCommission(float $amount)
+    public function getCommission(float $amount)
     {
         return (float) bcmul((string) $amount, (string) ($this->commission->percent / 100), 2);
     }

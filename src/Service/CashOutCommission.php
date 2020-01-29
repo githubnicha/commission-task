@@ -10,9 +10,9 @@ class CashOutCommission extends CommissionLimit implements CommissionInterface
 
     public $config;
 
-    public function __construct(UserTypeInterface $userType)
+    public function __construct(UserTypeInterface $userTypeConfig)
     {
-        $this->config = $userType;
+        $this->config = $userTypeConfig;
     }
     
 }

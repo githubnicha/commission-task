@@ -6,24 +6,106 @@ namespace Chasj\CommissionTask\Tests\Service;
 
 use PHPUnit\Framework\TestCase;
 use Chasj\CommissionTask\Service\Commission;
+use Chasj\CommissionTask\Service\Conversion;
+use Chasj\CommissionTask\Service\UserTypeFactory;
+use Chasj\CommissionTask\Service\OperationTypeFactory;
+use Chasj\CommissionTask\Service\CurrencyFactory;
 
 class CommissionTest extends TestCase
 {
-    /**
-     * @var Commission
-     */
-    private $commission;
 
-    public function setUp()
-    {
-        $this->commission = new Commission();
+    public function commission($data) {
+        $userType = UserTypeFactory::get($data['user_type'], $data['oprt_type']);
+        $operationType = OperationTypeFactory::get($userType, $data['oprt_type']);
+        $currency = (new CurrencyFactory())->get($data['currency']);
+        return new Commission($operationType, new Conversion($currency));
     }
 
-    public function testCompute()
+    public function testGetCommissionCashInLegal()
     {    
+        $mockData = [
+            "operation_date" => "2017-12-31",
+            "user_id_num" => 4,
+            "user_type" => "legal",
+            "oprt_type" => "cash_in",
+            "amount" => 12000,
+            "currency" => "EUR"
+        ];
+
+        $commission = $this->commission($mockData);
         $this->assertEquals(
             3.60,
-            $this->commission->compute(12000, 0.03)
+            $commission->getCommission(12000)
+        );
+    }
+
+    public function testGetCommissionCashInNatural()
+    {    
+        $mockData = [
+            "operation_date" => "2017-12-31",
+            "user_id_num" => 4,
+            "user_type" => "natural",
+            "oprt_type" => "cash_in",
+            "amount" => 12000,
+            "currency" => "EUR"
+        ];
+
+        $commission = $this->commission($mockData);
+        $this->assertEquals(
+            3.60,
+            $commission->getCommission(12000)
+        );
+    }
+
+    public function testGetCommissionCashOutNatural()
+    {    
+        $mockData = [
+            "operation_date" => "2017-12-31",
+            "user_id_num" => 4,
+            "user_type" => "natural",
+            "oprt_type" => "cash_out",
+            "amount" => 12000,
+            "currency" => "EUR"
+        ];
+
+        $commission = $this->commission($mockData);
+        $this->assertEquals(
+            36.00,
+            $commission->getCommission(12000)
+        );
+    }
+
+    public function testGetCommissionCashOutLegal()
+    {    
+        $mockData = [
+            "operation_date" => "2017-12-31",
+            "user_id_num" => 4,
+            "user_type" => "legal",
+            "oprt_type" => "cash_out",
+            "amount" => 12000,
+            "currency" => "EUR"
+        ];
+
+        $commission = $this->commission($mockData);
+        $this->assertEquals(
+            36.00,
+            $commission->getCommission(12000)
+        );
+    }
+
+    public function testCompute() {
+        $mockData = [
+            "operation_date" => "2017-12-31",
+            "user_id_num" => 4,
+            "user_type" => "natural",
+            "oprt_type" => "cash_in",
+            "amount" => 12000,
+            "currency" => "EUR"
+        ];
+        $commission = $this->commission($mockData);
+        $this->assertEquals(
+            3.60,
+            $commission->compute($mockData)
         );
     }
 
