@@ -24,7 +24,7 @@ class Commission
     {
         $commissionAmt = $this->getCommission($data['amount']);
         $converted = $this->conversion->convertToBase($commissionAmt);
-        $limit = $this->commission->limit($this->commission->userType->max(), $this->commission->userType->min(), $converted);
+        $limit = $this->commission->limit($this->commission->config->min(), $this->commission->config->max(), $converted);
         return bcadd($limit ? (string) $this->conversion->convertToBase($limit) : (string) $commissionAmt, '0', 2);
     }
 

@@ -6,7 +6,7 @@ namespace Chasj\CommissionTask\Service;
 
 class CommissionLimit extends Conversion implements CommissionLimitInterface
 {
-    public function limit($max, $min, $commission)
+    public function limit($min, $max, $commission)
     {
         if ($min > 0.00 && $commission < $min) {
             return $min;
