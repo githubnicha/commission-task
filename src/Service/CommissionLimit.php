@@ -9,11 +9,11 @@ class CommissionLimit extends Conversion implements CommissionLimitInterface
     public function limit($max, $min, $commission)
     {
         if ($min > 0.00 && $commission < $min) {
-            return $max;
+            return $min;
         }
 
         if ($max > 0.00 && $commission > $max) {
-            return $min;
+            return $max;
         }
         return 0;
     }
