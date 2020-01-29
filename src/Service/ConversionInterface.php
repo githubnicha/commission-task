@@ -9,5 +9,4 @@ interface ConversionInterface
     public function convertToBase(float $amount);
 
     public function convertToCurrency(float $amount);
-
 }

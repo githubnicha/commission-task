@@ -4,16 +4,19 @@ declare(strict_types=1);
 
 namespace Chasj\CommissionTask\Service;
 
-use Chasj\CommissionTask\Service\ConfigService;
 use Exception;
 
-class UserTypeFactory
+class UserTypeConfigFactory
 {
     public static function get(string $type, string $optType)
     {
-        $config = ConfigService::getConfig()[$optType][$type];
+        try {
+            $config = ConfigService::getConfig()[$optType][$type];
+        } catch (Exception $e) {
+            throw new Exception('Invalid Config');
+        }
         switch ($type) {
-            case 'legal': 
+            case 'legal':
                 return new LegalUserType($config);
             case 'natural':
                 return new NaturalUserType($config);

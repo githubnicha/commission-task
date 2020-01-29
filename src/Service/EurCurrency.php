@@ -6,7 +6,5 @@ namespace Chasj\CommissionTask\Service;
 
 class EurCurrency implements CurrencyInterface
 {
-    
     public $rate = '1.0';
-
 }

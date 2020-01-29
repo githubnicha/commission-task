@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Chasj\CommissionTask\Service;
 
-use Chasj\CommissionTask\Service\UserTypeInterface;
-
 class NaturalUserType implements UserTypeInterface
 {
     protected $config;
@@ -14,6 +12,7 @@ class NaturalUserType implements UserTypeInterface
     {
         $this->config = $config;
     }
+
     public function min()
     {
         return $this->config['min'];

@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Chasj\CommissionTask\Service;
 
-use Chasj\CommissionTask\Service\UserTypeInterface;
-
 class LegalUserType implements UserTypeInterface
 {
     protected $config;

@@ -18,7 +18,7 @@ class CommissionProcess
         if (($handle = fopen($this->file, 'r')) !== false) {
             while (($data = fgetcsv($handle, 1000, ',')) !== false) {
                 $arr = (new DataStructure())->clean($data);
-                $userType = UserTypeFactory::get($arr['user_type'], $arr['oprt_type']);
+                $userType = UserTypeConfigFactory::get($arr['user_type'], $arr['oprt_type']);
                 $operationType = OperationTypeFactory::get($userType, $arr['oprt_type']);
                 $currency = (new CurrencyFactory())->get($arr['currency']);
                 $commission = new Commission($operationType, new Conversion($currency));

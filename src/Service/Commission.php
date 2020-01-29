@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Chasj\CommissionTask\Service;
 
-class Commission 
+class Commission
 {
     protected $commission;
     protected $conversion;
@@ -20,12 +20,12 @@ class Commission
         return (float) bcmul((string) $amount, (string) ($this->commission->percent / 100), 2);
     }
 
-    public function compute($data) : string
+    public function compute($data): string
     {
         $commissionAmt = $this->getCommission($data['amount']);
         $converted = $this->conversion->convertToBase($commissionAmt);
         $limit = $this->commission->limit($this->commission->config->min(), $this->commission->config->max(), $converted);
-        return bcadd($limit ? (string) $this->conversion->convertToBase($limit) : (string) $commissionAmt, '0', 2);
-    }
 
+        return bcadd($limit ? (string) $this->conversion->convertToCurrency($limit) : (string) $commissionAmt, '0', 2);
+    }
 }

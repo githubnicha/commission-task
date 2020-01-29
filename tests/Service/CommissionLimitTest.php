@@ -13,15 +13,31 @@ class CommissionLimitTest extends TestCase
 
     public function setUp()
     {
-        //$this->commissionLimit = new CommissionLimit();
+        $this->commissionLimit = new CommissionLimit();
     }
 
-    public function testLimit()
+    public function testLimitWithMax()
     {
-        // $this->assertEquals(
-        //     3.60,
-        //     $this->commissionLimit->limit(0, 5, 100)
-        // );
+        $this->assertEquals(
+            '5',
+            $this->commissionLimit->limit(5, 0, 2)
+        );
+    }
+
+    public function testNoLimit()
+    {
+        $this->assertEquals(
+            0,
+            $this->commissionLimit->limit(0, 0, 20)
+        );
+    }
+
+    public function testLimitWithMin()
+    {
+        $this->assertEquals(
+            10,
+            $this->commissionLimit->limit(0, 10, 20)
+        );
     }
 
 }

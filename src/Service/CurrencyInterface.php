@@ -6,5 +6,5 @@ namespace ChaSJ\CommissionTask\Service;
 
 interface CurrencyInterface
 {
-
+    
 }

@@ -7,7 +7,7 @@ namespace Chasj\CommissionTask\Tests\Service;
 use PHPUnit\Framework\TestCase;
 use Chasj\CommissionTask\Service\Commission;
 use Chasj\CommissionTask\Service\Conversion;
-use Chasj\CommissionTask\Service\UserTypeFactory;
+use Chasj\CommissionTask\Service\UserTypeConfigFactory;
 use Chasj\CommissionTask\Service\OperationTypeFactory;
 use Chasj\CommissionTask\Service\CurrencyFactory;
 
@@ -15,7 +15,7 @@ class CommissionTest extends TestCase
 {
 
     public function commission($data) {
-        $userType = UserTypeFactory::get($data['user_type'], $data['oprt_type']);
+        $userType = UserTypeConfigFactory::get($data['user_type'], $data['oprt_type']);
         $operationType = OperationTypeFactory::get($userType, $data['oprt_type']);
         $currency = (new CurrencyFactory())->get($data['currency']);
         return new Commission($operationType, new Conversion($currency));

@@ -8,17 +8,17 @@ use Exception;
 
 class CurrencyFactory
 {
-    public function get(string $currency) 
+    public function get(string $currency)
     {
         switch ($currency) {
-            case 'EUR': 
+            case 'EUR':
                 return new EurCurrency();
-            case 'USD': 
+            case 'USD':
                 return new UsdCurrency();
-            case 'JPY': 
+            case 'JPY':
                 return new JpyCurrency();
             default:
-                throw new Exception('Invalid Currency');       
+                throw new Exception('Invalid Currency');
         }
     }
 }
