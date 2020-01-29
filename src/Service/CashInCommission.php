@@ -4,18 +4,17 @@ declare(strict_types=1);
 
 namespace Chasj\CommissionTask\Service;
 
-class CashInCommission extends Commission
+use Chasj\CommissionTask\Service\CommissionInterface;
+
+class CashInCommission extends CommissionLimit implements CommissionInterface
 {
-    protected $percent = 0.03;
-    protected $max = 5.00;
+    public $percent = 0.03;
+    public $userType;
 
-    public function commission(array $data)
+    public function __construct(UserTypeInterface $userType)
     {
-        $commission = $this->compute($data['amount'], $this->percent);
-        $converted = $this->convertToBase($data['currency'], $commission);
-
-        return bcadd((string) ($converted > $this->max ?
-            $this->convertToCurrency($data['currency'], $this->max) :
-            $commission), '0', 2);
+        $this->userType = $userType;
     }
+
+    
 }

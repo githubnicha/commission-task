@@ -19,14 +19,6 @@ class ConversionTest extends TestCase
         $this->conversion = new Conversion();
     }
 
-    public function testCurrency()
-    {
-        $this->assertEquals(
-            true,
-            $this->conversion->currencyCheck('JPY')
-        );
-    }    
-
     public function testConvertToBase()
     {  
         $this->assertEquals(
