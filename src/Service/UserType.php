@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Chasj\CommissionTask\Service;
 
-class LegalUserType implements UserTypeInterface
+class UserType implements UserTypeInterface
 {
     protected $config;
 
@@ -21,5 +21,10 @@ class LegalUserType implements UserTypeInterface
     public function max()
     {
         return $this->config['max'];
+    }
+
+    public function discount()
+    {
+        return $this->config['discount'];
     }
 }

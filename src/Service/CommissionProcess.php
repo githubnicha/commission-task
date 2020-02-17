@@ -17,8 +17,9 @@ class CommissionProcess
     {
         if (($handle = fopen($this->file, 'r')) !== false) {
             $currencyRates = ConfigService::get('currency_rate');
-            while (($data = fgetcsv($handle, 1000, ',')) !== false) {
-                $arr = (new DataStructure())->clean($data);
+            $dataStruc = new DataStructure();
+            $data = $dataStruc->gather($handle);
+            foreach($data as $arr) {
                 $userType = UserTypeConfig::get($arr['user_type'], $arr['oprt_type']);
                 $operationType = OperationType::get($userType, $arr['oprt_type']);
                 $currency = new Currency($currencyRates, $arr['currency']);

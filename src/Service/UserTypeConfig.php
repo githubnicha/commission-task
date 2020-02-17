@@ -15,13 +15,6 @@ class UserTypeConfig
         } catch (Exception $e) {
             throw new Exception('Invalid Config');
         }
-        switch ($type) {
-            case 'legal':
-                return new LegalUserType($config);
-            case 'natural':
-                return new NaturalUserType($config);
-            default:
-                throw new Exception('Invalid User Type');
-        }
+        return new UserType($config);
     }
 }

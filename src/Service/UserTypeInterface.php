@@ -9,4 +9,6 @@ interface UserTypeInterface
     public function min();
 
     public function max();
+
+    public function discount();
 }

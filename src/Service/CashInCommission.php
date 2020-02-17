@@ -13,4 +13,9 @@ class CashInCommission extends CommissionLimit implements CommissionInterface
     {
         $this->config = $userTypeConfig;
     }
+
+    public function discount()
+    {
+        return 0;
+    }
 }

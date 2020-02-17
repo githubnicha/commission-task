@@ -19,24 +19,6 @@ class UserTypeConfigFactoryTest extends TestCase
         $this->factory = new UserTypeConfig;
     }
 
-    public function testNotUserType()
-    {
-        $config = ConfigService::get('commission')['cash_out']['natural'];
-        $this->assertNotEquals(
-            new LegalUserType($config),
-            $this->factory->get('natural', 'cash_out')
-        );
-    }
-
-    public function testGetUserType()
-    {
-        $config = ConfigService::get('commission')['cash_out']['legal'];
-        $this->assertEquals(
-            new LegalUserType($config),
-            $this->factory->get('legal', 'cash_out')
-        );
-    }
-
     public function testInvalidUserType()
     {
         try {
