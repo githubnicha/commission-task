@@ -6,7 +6,8 @@ namespace Chasj\CommissionTask\Tests\Service;
 
 use PHPUnit\Framework\TestCase;
 use Chasj\CommissionTask\Service\Conversion;
-use Chasj\CommissionTask\Service\JpyCurrency;
+use Chasj\CommissionTask\Service\Currency;
+use Chasj\CommissionTask\Service\ConfigService;
 
 class ConversionTest extends TestCase
 {
@@ -17,7 +18,8 @@ class ConversionTest extends TestCase
 
     public function setUp()
     {
-        $this->conversion = new Conversion(new JpyCurrency());
+        $currency = new Currency(ConfigService::get('currency_rate'), 'JPY');
+        $this->conversion = new Conversion($currency);
     }
 
     public function testConvertToBase()

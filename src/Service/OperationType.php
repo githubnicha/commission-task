@@ -6,7 +6,7 @@ namespace Chasj\CommissionTask\Service;
 
 use Exception;
 
-class OperationTypeFactory
+class OperationType
 {
     public static function get(UserTypeInterface $userType, string $type)
     {

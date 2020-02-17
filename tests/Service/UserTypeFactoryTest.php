@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Chasj\CommissionTask\Tests\Service;
 
-use Chasj\CommissionTask\Service\UserTypeConfigFactory;
+use Chasj\CommissionTask\Service\UserTypeConfig;
 use Chasj\CommissionTask\Service\LegalUserType;
 use PHPUnit\Framework\TestCase;
 use Exception;
@@ -16,12 +16,12 @@ class UserTypeConfigFactoryTest extends TestCase
 
     public function setUp()
     {
-        $this->factory = new UserTypeConfigFactory;
+        $this->factory = new UserTypeConfig;
     }
 
     public function testNotUserType()
     {
-        $config = ConfigService::getConfig()['cash_out']['natural'];
+        $config = ConfigService::get('commission')['cash_out']['natural'];
         $this->assertNotEquals(
             new LegalUserType($config),
             $this->factory->get('natural', 'cash_out')
@@ -30,7 +30,7 @@ class UserTypeConfigFactoryTest extends TestCase
 
     public function testGetUserType()
     {
-        $config = ConfigService::getConfig()['cash_out']['legal'];
+        $config = ConfigService::get('commission')['cash_out']['legal'];
         $this->assertEquals(
             new LegalUserType($config),
             $this->factory->get('legal', 'cash_out')

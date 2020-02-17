@@ -6,18 +6,20 @@ namespace Chasj\CommissionTask\Tests\Service;
 
 use PHPUnit\Framework\TestCase;
 use Chasj\CommissionTask\Service\Commission;
+use Chasj\CommissionTask\Service\ConfigService;
 use Chasj\CommissionTask\Service\Conversion;
-use Chasj\CommissionTask\Service\UserTypeConfigFactory;
-use Chasj\CommissionTask\Service\OperationTypeFactory;
-use Chasj\CommissionTask\Service\CurrencyFactory;
+use Chasj\CommissionTask\Service\UserTypeConfig;
+use Chasj\CommissionTask\Service\OperationType;
+use Chasj\CommissionTask\Service\Currency;
 
 class CommissionTest extends TestCase
 {
 
     public function commission($data) {
-        $userType = UserTypeConfigFactory::get($data['user_type'], $data['oprt_type']);
-        $operationType = OperationTypeFactory::get($userType, $data['oprt_type']);
-        $currency = (new CurrencyFactory())->get($data['currency']);
+        $currencyRates = ConfigService::get('currency_rate');
+        $userType = UserTypeConfig::get($data['user_type'], $data['oprt_type']);
+        $operationType = OperationType::get($userType, $data['oprt_type']);
+        $currency = (new Currency($currencyRates, $data['currency']));
         return new Commission($operationType, new Conversion($currency));
     }
 

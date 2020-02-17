@@ -6,12 +6,12 @@ namespace Chasj\CommissionTask\Service;
 
 use Exception;
 
-class UserTypeConfigFactory
+class UserTypeConfig
 {
     public static function get(string $type, string $optType)
     {
         try {
-            $config = ConfigService::getConfig()[$optType][$type];
+            $config = ConfigService::get('commission')[$optType][$type];
         } catch (Exception $e) {
             throw new Exception('Invalid Config');
         }

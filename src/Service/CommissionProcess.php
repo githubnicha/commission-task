@@ -16,11 +16,12 @@ class CommissionProcess
     public function run()
     {
         if (($handle = fopen($this->file, 'r')) !== false) {
+            $currencyRates = ConfigService::get('currency_rate');
             while (($data = fgetcsv($handle, 1000, ',')) !== false) {
                 $arr = (new DataStructure())->clean($data);
-                $userType = UserTypeConfigFactory::get($arr['user_type'], $arr['oprt_type']);
-                $operationType = OperationTypeFactory::get($userType, $arr['oprt_type']);
-                $currency = (new CurrencyFactory())->get($arr['currency']);
+                $userType = UserTypeConfig::get($arr['user_type'], $arr['oprt_type']);
+                $operationType = OperationType::get($userType, $arr['oprt_type']);
+                $currency = new Currency($currencyRates, $arr['currency']);
                 $commission = new Commission($operationType, new Conversion($currency));
                 echo $commission->compute($arr).PHP_EOL;
             }

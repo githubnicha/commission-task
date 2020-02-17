@@ -8,7 +8,7 @@ class Conversion implements ConversionInterface
 {
     public $currency;
 
-    public function __construct(CurrencyInterface $currency)
+    public function __construct($currency)
     {
         $this->currency = $currency;
     }

@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace Chasj\CommissionTask\Tests\Service;
 
 use PHPUnit\Framework\TestCase;
-use Chasj\CommissionTask\Service\OperationTypeFactory;
-use Chasj\CommissionTask\Service\UserTypeConfigFactory;
+use Chasj\CommissionTask\Service\OperationType;
+use Chasj\CommissionTask\Service\UserTypeConfig;
 use Chasj\CommissionTask\Service\CashInCommission;
-use Chasj\CommissionTask\Service\CashOutCommission;
 use Exception;
 
 class OperationTypeFactoryTest extends TestCase
@@ -17,7 +16,7 @@ class OperationTypeFactoryTest extends TestCase
 
     public function setUp()
     {
-        $this->factory = new OperationTypeFactory;
+        $this->factory = new OperationType;
     }
 
     public function testGetOperationType()
@@ -30,7 +29,7 @@ class OperationTypeFactoryTest extends TestCase
             "amount" => 12000,
             "currency" => "EUR"
         ];
-        $userType = UserTypeConfigFactory::get($mockData['user_type'], $mockData['oprt_type']);
+        $userType = UserTypeConfig::get($mockData['user_type'], $mockData['oprt_type']);
         
         $this->assertEquals(
             new CashInCommission($userType),
@@ -41,7 +40,7 @@ class OperationTypeFactoryTest extends TestCase
     public function testInvalidOperationType()
     {
         try {
-            $userType = UserTypeConfigFactory::get('natural', 'cash');
+            $userType = UserTypeConfig::get('natural', 'cash');
             $this->factory->get($userType, 'cash');
         } catch (Exception $e) {
             $this->assertEquals(
